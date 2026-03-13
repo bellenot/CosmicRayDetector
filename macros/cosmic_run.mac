@@ -1,0 +1,15 @@
+# ============================================================
+# cosmic_run.mac  —  batch run, 1000 events
+# ============================================================
+
+/run/initialize
+/run/verbose 1
+/tracking/verbose 0
+/event/verbose 0
+
+/tracking/storeTrajectory 2
+
+/CosmicGen/sourceRadius 350.
+/CosmicGen/verbose false
+
+/run/beamOn 1000

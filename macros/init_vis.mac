@@ -1,0 +1,10 @@
+# ============================================================
+# init_vis.mac
+# Called automatically in interactive mode
+# ============================================================
+
+# Initialize the kernel
+/run/initialize
+
+# Execute visualisation setup
+/control/execute macros/vis.mac

@@ -1,0 +1,47 @@
+# ============================================================
+# vis.mac  —  OpenGL visualisation for CosmicRayDetector
+# ============================================================
+
+/vis/open OGL 1024x768-0+0
+
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+
+/vis/drawVolume
+
+# Isometric 3D view
+/vis/viewer/set/viewpointThetaPhi 65 25
+/vis/viewer/set/lightsVector -1 -0.5 0
+/vis/viewer/zoom 1.4
+
+# Dark background
+/vis/viewer/set/background 0.08 0.08 0.12 1
+
+# Axes and scale
+/vis/scene/add/axes 0 0 0 5 cm
+#/vis/scene/add/scale 5 cm x 1 0 0 auto white
+/vis/scene/add/scale 5 cm x 1 0 0 auto
+
+# ---- Trajectories ----
+/tracking/storeTrajectory 1
+/vis/scene/add/trajectories smooth
+
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set mu-     blue
+/vis/modeling/trajectories/drawByParticleID-0/set mu+     magenta
+/vis/modeling/trajectories/drawByParticleID-0/set gamma   yellow
+/vis/modeling/trajectories/drawByParticleID-0/set e-      red
+/vis/modeling/trajectories/drawByParticleID-0/set e+      cyan
+/vis/modeling/trajectories/drawByParticleID-0/set proton  white
+/vis/modeling/trajectories/drawByParticleID-0/set neutron green
+/vis/modeling/trajectories/drawByParticleID-0/set alpha   orange
+
+# ---- Hits ----
+/vis/scene/add/hits
+
+# Accumulate up to 100 events
+/vis/scene/endOfEventAction accumulate 100
+
+/vis/viewer/set/autoRefresh true
+/vis/verbose warnings
+/vis/viewer/flush

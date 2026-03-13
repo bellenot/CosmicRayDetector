@@ -1,0 +1,16 @@
+# ============================================================
+# run.mac  —  quick interactive test (10 events)
+# ============================================================
+
+/run/initialize
+
+# Store rich trajectories so per-step draw flags work
+/tracking/storeTrajectory 2
+
+# Verbose generator so you can see what was fired
+/CosmicGen/verbose true
+
+# Source hemisphere radius
+/CosmicGen/sourceRadius 350.
+
+/run/beamOn 10
