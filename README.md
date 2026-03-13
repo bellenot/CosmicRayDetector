@@ -19,7 +19,6 @@ used for cosmic ray detection, featuring:
 ```
 CosmicRayDetector/
 ├── CMakeLists.txt
-├── CosmicRayDetector.cc          # main()
 ├── include/
 │   ├── DetectorConstruction.hh
 │   ├── PhysicsList.hh
@@ -31,6 +30,7 @@ CosmicRayDetector/
 │   ├── ScintiSD.hh / ScintiHit.hh
 │   └── PMTSD.hh   / PMTHit.hh
 ├── src/
+│   ├── CosmicRayDetector.cc      # main()
 │   ├── DetectorConstruction.cc   # geometry + materials + optical surfaces
 │   ├── PhysicsList.cc            # EM + hadronic + optical physics
 │   ├── ActionInitialization.cc
