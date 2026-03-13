@@ -1,6 +1,6 @@
 # CosmicRayDetector — Geant4 Simulation
 
-A complete Geant4 simulation of a **plastic scintillator bar** (5 × 5 × 20 cm)
+A complete Geant4 simulation of a **plastic scintillator bar** (2.4 × 3.5 × 8 cm)
 used for cosmic ray detection, featuring:
 
 - **Scintillator** — EJ-200/BC-408 equivalent (polyvinyltoluene, PVT)
@@ -121,10 +121,10 @@ light-tight enclosure around the entire assembly.
    ──────────────────────────────────────────────────── Z axis
    ←────────────── Al foil shell (0.1 mm, all faces) ──────────────→
    ┌──────────────────────────────────────────────────────────────┐
-   │  ┌────────────────────────┐  ┌──┐  ┌──────────┬──────────┐  │
-   │  │   Scintillator (PVT)   │  │Gl│  │  Window  │   PMT    │  │
-   │  │   5 × 5 × 20 cm        │  │ue│  │  (glass) │ (vacuum) │  │
-   │  └────────────────────────┘  └──┘  └──────────┴──────────┘  │
+   │  ┌────────────────────────┐  ┌──┐  ┌──────────┬──────────┐   │
+   │  │   Scintillator (PVT)   │  │Gl│  │  Window  │   PMT    │   │
+   │  │   3.5 × 2.4 × 8 cm     │  │ue│  │  (glass) │ (vacuum) │   │
+   │  └────────────────────────┘  └──┘  └──────────┴──────────┘   │
    └──────────────────────────────────────────────────────────────┘
   –Z end cap                                            +Z end cap
 
