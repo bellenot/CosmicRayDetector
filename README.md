@@ -18,7 +18,6 @@ used for cosmic ray detection, featuring:
 ```
 CosmicRayDetector/
 ├── CMakeLists.txt
-├── CosmicRayDetector.cc          # main()
 ├── include/
 │   ├── DetectorConstruction.hh
 │   ├── PhysicsList.hh
@@ -29,6 +28,7 @@ CosmicRayDetector/
 │   ├── ScintiSD.hh / ScintiHit.hh
 │   └── PMTSD.hh   / PMTHit.hh
 ├── src/
+|   ├── CosmicRayDetector.cc      # main()
 │   ├── DetectorConstruction.cc   # geometry + materials + optical surfaces
 │   ├── PhysicsList.cc            # EM + hadronic + optical physics
 │   ├── ActionInitialization.cc
@@ -112,9 +112,9 @@ Z-axis (beam direction = downward in lab, +Z in simulation)
  ─────────────────────────────────────────────────────────►
            │← Al foil (0.1 mm, 5 faces) →│
  ┌─────────┼─────────────────────────────┼──┬──────────────┐
- │         │     Scintillator (PVT)       │G │ PMT (vacuum) │
+ │         │     Scintillator (PVT)      │G │ PMT (vacuum) │
  │         │    5 × 5 × 20 cm            │l │  ⌀ 4.2 cm    │
- │         │    EJ-200 equivalent         │u │  5 cm long   │
+ │         │    EJ-200 equivalent        │u │  5 cm long   │
  │         │    8000 ph/MeV, τ=2.1 ns    │e │              │
  └─────────┼─────────────────────────────┼──┴──────────────┘
                                            ↑
