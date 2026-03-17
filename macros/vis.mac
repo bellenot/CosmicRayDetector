@@ -24,7 +24,9 @@
 #/vis/scene/add/axes
 #/vis/scene/add/scale
 
+# Projection (perspective)
 /vis/viewer/set/projection p
+# Hidden lines and surfaces removal
 /vis/viewer/set/hiddenEdge 1
 
 # ---- Trajectories ----
