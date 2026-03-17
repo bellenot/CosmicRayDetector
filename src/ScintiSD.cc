@@ -4,6 +4,7 @@
 #include "ScintiSD.hh"
 #include "G4HCofThisEvent.hh"
 #include "G4Step.hh"
+#include "G4Track.hh"
 #include "G4ThreeVector.hh"
 #include "G4SDManager.hh"
 #include "G4OpticalPhoton.hh"
@@ -41,6 +42,7 @@ G4bool ScintiSD::ProcessHits(G4Step* step, G4TouchableHistory*)
   hit->SetTime(step->GetPostStepPoint()->GetGlobalTime());
   hit->SetParticleName(step->GetTrack()->GetDefinition()->GetParticleName());
   hit->SetTrackLength(step->GetStepLength());
+  hit->SetParentID(step->GetTrack()->GetParentID());  // 0=primary, >0=secondary
 
   fHitsCollection->insert(hit);
   return true;
@@ -48,8 +50,7 @@ G4bool ScintiSD::ProcessHits(G4Step* step, G4TouchableHistory*)
 
 void ScintiSD::EndOfEvent(G4HCofThisEvent*)
 {
-  if (verboseLevel > 1) {
-    G4int nHits = fHitsCollection->entries();
-    G4cout << "ScintiSD: " << nHits << " hits in scintillator." << G4endl;
-  }
+  if (verboseLevel > 1)
+    G4cout << "ScintiSD: " << fHitsCollection->entries()
+           << " hits in scintillator." << G4endl;
 }

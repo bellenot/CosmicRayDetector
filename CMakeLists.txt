@@ -19,6 +19,19 @@ endif()
 include(${Geant4_USE_FILE})
 
 #----------------------------------------------------------------------------
+# ROOT  (optional but required for histogram output)
+# If ROOT is not found the build still works but histograms are disabled.
+#----------------------------------------------------------------------------
+find_package(ROOT QUIET COMPONENTS Core RIO Hist Tree)
+if(ROOT_FOUND)
+  message(STATUS "ROOT found: ${ROOT_VERSION} — histograms enabled")
+  include(${ROOT_USE_FILE})
+  add_definitions(-DHAS_ROOT)
+else()
+  message(WARNING "ROOT not found — no histogram output will be produced")
+endif()
+
+#----------------------------------------------------------------------------
 # Locate sources and headers for this project
 #----------------------------------------------------------------------------
 include_directories(${PROJECT_SOURCE_DIR}/include)
@@ -31,6 +44,9 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 add_executable(CosmicRayDetector ${sources} ${headers})
 target_link_libraries(CosmicRayDetector ${Geant4_LIBRARIES})
+if(ROOT_FOUND)
+  target_link_libraries(CosmicRayDetector ${ROOT_LIBRARIES})
+endif()
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory
@@ -40,6 +56,8 @@ set(COSMICRAY_SCRIPTS
   macros/vis.mac
   macros/run.mac
   macros/cosmic_run.mac
+  macros/multi_run.mac
+  macros/plot_results.C
 )
 
 foreach(_script ${COSMICRAY_SCRIPTS})

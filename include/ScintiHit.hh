@@ -26,18 +26,20 @@ public:
   virtual void Print();
 
   // Setters
-  void SetEdep(G4double e)           { fEdep = e; }
-  void SetPos(G4ThreeVector p)       { fPos = p; }
-  void SetTime(G4double t)           { fTime = t; }
-  void SetParticleName(G4String n)   { fParticleName = n; }
-  void SetTrackLength(G4double l)    { fTrackLength = l; }
+  void SetEdep(G4double e)         { fEdep = e; }
+  void SetPos(G4ThreeVector p)     { fPos = p; }
+  void SetTime(G4double t)         { fTime = t; }
+  void SetParticleName(G4String n) { fParticleName = n; }
+  void SetTrackLength(G4double l)  { fTrackLength = l; }
+  void SetParentID(G4int id)       { fParentID = id; }   // 0=primary, >0=secondary
 
   // Getters
-  G4double      GetEdep()           const { return fEdep; }
-  G4ThreeVector GetPos()            const { return fPos; }
-  G4double      GetTime()           const { return fTime; }
-  G4String      GetParticleName()   const { return fParticleName; }
-  G4double      GetTrackLength()    const { return fTrackLength; }
+  G4double      GetEdep()         const { return fEdep; }
+  G4ThreeVector GetPos()          const { return fPos; }
+  G4double      GetTime()         const { return fTime; }
+  G4String      GetParticleName() const { return fParticleName; }
+  G4double      GetTrackLength()  const { return fTrackLength; }
+  G4int         GetParentID()     const { return fParentID; }
 
 private:
   G4double      fEdep;
@@ -45,6 +47,7 @@ private:
   G4double      fTime;
   G4String      fParticleName;
   G4double      fTrackLength;
+  G4int         fParentID;
 };
 
 typedef G4THitsCollection<ScintiHit> ScintiHitsCollection;

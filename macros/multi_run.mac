@@ -1,0 +1,41 @@
+# ============================================================
+# multi_run.mac
+#
+# Runs N independent runs, each producing its own ROOT file:
+#   CosmicRayDetector_run0.root
+#   CosmicRayDetector_run1.root
+#   ...
+#
+# Each run fires 1000 events with the full cosmic-ray mix.
+# Adjust /run/beamOn and the loop count below as needed.
+#
+# Usage:
+#   ./CosmicRayDetector macros/multi_run.mac
+# ============================================================
+
+/run/initialize
+/run/verbose 1
+/tracking/verbose 0
+/event/verbose 0
+
+/CosmicGen/sourceRadius 350.
+/CosmicGen/verbose false
+
+# --- Run 0 ---
+/run/beamOn 1000
+
+# --- Run 1 ---
+/run/beamOn 1000
+
+# --- Run 2 ---
+/run/beamOn 1000
+
+# --- Run 3 ---
+/run/beamOn 1000
+
+# --- Run 4 ---
+/run/beamOn 1000
+
+# Add more /run/beamOn lines to increase the number of runs.
+# Each call to /run/beamOn automatically increments the run ID,
+# producing a new ROOT file CosmicRayDetector_runN.root.

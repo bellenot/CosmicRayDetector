@@ -6,6 +6,7 @@
 
 #include "G4UserEventAction.hh"
 #include "globals.hh"
+#include <map>
 
 class RunAction;
 
@@ -19,7 +20,7 @@ public:
 
 private:
   RunAction* fRunAction;
-  G4double   fEdep;
+//  G4double   fEdep;
   G4int      fScintiHCID;
   G4int      fPMTHCID;
 };
