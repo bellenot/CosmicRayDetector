@@ -30,40 +30,32 @@ RunAction::RunAction()
   // ---- 1D histograms ----
   // H1 id=0: total Edep per event
   anaMgr->CreateH1("h_edep",
-      "Energy deposit in scintillator per event;E_{dep} (MeV);Events",
-      200, 0., 500.);
+      "Energy deposit in scintillator per event;E_{dep} (MeV);Events", 200, 0., 20.);
 
   // H1 id=1: raw photon count at PMT per event
   anaMgr->CreateH1("h_photons",
-      "Optical photons reaching PMT per event;N_{photons};Events",
-      200, 0., 2000.);
+      "Optical photons reaching PMT per event;N_{photons};Events", 200, 0., 25000.);
 
   // H1 id=2: photoelectron count per event
   anaMgr->CreateH1("h_pe",
-      "Photoelectrons produced per event;N_{PE};Events",
-      200, 0., 500.);
+      "Photoelectrons produced per event;N_{PE};Events", 200, 0., 5000.);
 
   // H1 id=3: Edep from primary tracks only
   anaMgr->CreateH1("h_edep_primary",
-      "Edep from primary tracks;E_{dep,primary} (MeV);Events",
-      200, 0., 500.);
+      "Edep from primary tracks;E_{dep,primary} (MeV);Events", 200, 0., 15.);
 
   // H1 id=4: Edep from secondary tracks only
   anaMgr->CreateH1("h_edep_secondary",
-      "Edep from secondary tracks;E_{dep,secondary} (MeV);Events",
-      200, 0., 200.);
+      "Edep from secondary tracks;E_{dep,secondary} (MeV);Events", 200, 0., 15.);
 
   // H1 id=5: photon arrival time at PMT (relative to event start)
   anaMgr->CreateH1("h_photon_time",
-      "Optical photon arrival time at PMT;t (ns);Photons",
-      200, 0., 100.);
+      "Optical photon arrival time at PMT;t (ns);Photons", 200, 0., 20.);
 
   // ---- 2D histogram ----
   // H2 id=0: Edep vs PE count
   anaMgr->CreateH2("h_edep_vs_pe",
-      "Energy deposit vs photoelectrons;E_{dep} (MeV);N_{PE}",
-      100, 0., 500.,
-      100, 0., 500.);
+      "Energy deposit vs photoelectrons;E_{dep} (MeV);N_{PE}", 100, 0., 20., 100, 0., 5000.);
 
   // ---- Ntuples (one row per event) ----
   // Ntuple id=0: per-event summary

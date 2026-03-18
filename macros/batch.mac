@@ -1,0 +1,18 @@
+# ============================================================
+# batch.mac  —  macro to run in batch mode. For example:
+# CosmicRayDetector.exe macros/batch.mac
+# ============================================================
+
+/run/initialize
+/run/verbose 1
+/tracking/verbose 0
+/event/verbose 0
+
+/tracking/storeTrajectory 2
+
+/CosmicGen/sourceRadius 350.
+/CosmicGen/verbose false
+
+
+# --- Run 0 ---
+/run/beamOn 10000
