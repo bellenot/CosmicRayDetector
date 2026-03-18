@@ -40,7 +40,7 @@ void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
   // ============================================================
   // Canvas 1: Energy deposit
   // ============================================================
-  TCanvas *c1 = new TCanvas("c1", "Energy Deposition", 1200, 800);
+  TCanvas *c1 = new TCanvas("c1", "Energy Deposition", 1500, 800);
   c1->Divide(3, 2);
 
   c1->cd(1);
@@ -66,7 +66,7 @@ void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
   h_sec->SetFillStyle(3005);
   h_pri->Draw("HIST");
   h_sec->Draw("HIST SAME");
-  TLegend *leg1 = new TLegend(0.52, 0.75, 0.88, 0.88);
+  TLegend *leg1 = new TLegend(0.65, 0.75, 0.88, 0.88);
   leg1->AddEntry(h_pri, "Primary tracks",   "f");
   leg1->AddEntry(h_sec, "Secondary tracks", "f");
   leg1->Draw();
@@ -91,6 +91,11 @@ void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
   h_qe->SetTitle("Observed QE per event (N_{ph}>5);N_{PE}/N_{photons};Events");
   h_qe->SetFillColor(kCyan + 1);
   h_qe->Draw("HIST");
+
+  c1->cd(6);
+  TImage *img = TImage::Open("one_event.png");
+  if (img)
+    img->Draw();
 
   c1->SaveAs("energy_deposition.pdf");
 
