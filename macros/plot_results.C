@@ -93,7 +93,7 @@ void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
   h_qe->Draw("HIST");
 
   c1->cd(6);
-  TImage *img = TImage::Open("one_event.png");
+  TImage *img = TImage::Open("macros/one_event.png");
   if (img)
     img->Draw();
 
