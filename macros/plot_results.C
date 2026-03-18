@@ -24,8 +24,9 @@
 
 void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
 {
-  gStyle->SetOptStat(1110);
-  gStyle->SetOptFit(1);
+  //gStyle->SetOptStat(1110);
+  gStyle->SetOptStat(0);
+  gStyle->SetOptFit(0);
   gStyle->SetPalette(kBird);
 
   // ---- Merge all matching files ----
@@ -67,7 +68,7 @@ void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
   h_sec->SetFillStyle(3005);
   h_pri->Draw("HIST");
   h_sec->Draw("HIST SAME");
-  TLegend *leg1 = new TLegend(0.55, 0.65, 0.88, 0.88);
+  TLegend *leg1 = new TLegend(0.52, 0.75, 0.88, 0.88);
   leg1->AddEntry(h_pri, "Primary tracks",   "f");
   leg1->AddEntry(h_sec, "Secondary tracks", "f");
   leg1->Draw();
