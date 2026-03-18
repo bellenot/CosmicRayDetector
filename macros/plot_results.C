@@ -86,7 +86,6 @@ void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
   auto *h2 = (TH2*)gDirectory->Get("h_edep_pe");
   h2->SetTitle("E_{dep} vs Photoelectrons;E_{dep} (MeV);N_{PE}");
   h2->Draw("COLZ");
-  c1->SaveAs("energy_deposition.pdf");
 
   c1->cd(5);
   chEvents->Draw("n_pe/n_photons>>h_qe(100, 0, 0.4)", "n_photons > 5", "HIST");
@@ -94,6 +93,8 @@ void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
   h_qe->SetTitle("Observed QE per event (N_{ph}>5);N_{PE}/N_{photons};Events");
   h_qe->SetFillColor(kCyan + 1);
   h_qe->Draw("HIST");
+
+  c1->SaveAs("energy_deposition.pdf");
 
   std::cout << "\nPlots saved:\n"
             << "  energy_deposition.pdf\n";
