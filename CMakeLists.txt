@@ -52,12 +52,14 @@ endif()
 # Copy all scripts to the build directory
 #----------------------------------------------------------------------------
 set(COSMICRAY_SCRIPTS
+  macros/batch.mac
   macros/init_vis.mac
   macros/vis.mac
   macros/run.mac
   macros/cosmic_run.mac
   macros/multi_run.mac
   macros/plot_results.C
+  macros/one_event.png
 )
 
 foreach(_script ${COSMICRAY_SCRIPTS})
