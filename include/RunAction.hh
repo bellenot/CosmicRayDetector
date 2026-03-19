@@ -40,7 +40,7 @@ public:
   void AddPhotoelectron()        { fTotalPE      += 1; }
 
   // Output filename (can be overridden before BeginOfRunAction)
-  void SetOutputFileName(const G4String& name) { fFileName = name; }
+  void SetOutputFileName(const G4String &name) { fFileName = name; }
 
 private:
   G4Accumulable<G4double> fTotalEdep;

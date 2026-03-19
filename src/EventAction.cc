@@ -38,7 +38,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4ios.hh"
 
-EventAction::EventAction(RunAction* ra)
+EventAction::EventAction(RunAction *ra)
   : G4UserEventAction(), fRunAction(ra),
     fScintiHCID(-1), fPMTHCID(-1)
 {}
@@ -47,17 +47,17 @@ EventAction::~EventAction() {}
 void EventAction::BeginOfEventAction(const G4Event*) {}
 
 //----------------------------------------------------------------------------
-void EventAction::EndOfEventAction(const G4Event* event)
+void EventAction::EndOfEventAction(const G4Event *event)
 {
-  G4HCofThisEvent* hce = event->GetHCofThisEvent();
+  G4HCofThisEvent *hce = event->GetHCofThisEvent();
   if (!hce) return;
 
-  auto* sdm = G4SDManager::GetSDMpointer();
+  auto *sdm = G4SDManager::GetSDMpointer();
   if (fScintiHCID < 0) fScintiHCID = sdm->GetCollectionID("ScintiHitsCollection");
   if (fPMTHCID    < 0) fPMTHCID    = sdm->GetCollectionID("PMTHitsCollection");
 
-  auto* sHC = static_cast<ScintiHitsCollection*>(hce->GetHC(fScintiHCID));
-  auto* pHC = static_cast<PMTHitsCollection*>   (hce->GetHC(fPMTHCID));
+  auto *sHC = static_cast<ScintiHitsCollection*>(hce->GetHC(fScintiHCID));
+  auto *pHC = static_cast<PMTHitsCollection*>   (hce->GetHC(fPMTHCID));
 
   //--------------------------------------------------------------------------
   // Scintillator hits — accumulate per-event quantities
@@ -71,7 +71,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
 
   if (sHC) {
     for (size_t i = 0; i < sHC->entries(); ++i) {
-      ScintiHit* h   = (*sHC)[i];
+      ScintiHit *h   = (*sHC)[i];
       G4double   e   = h->GetEdep();
       G4bool     pri = (h->GetParentID() == 0);
       G4String   pn  = h->GetParticleName();
@@ -80,9 +80,11 @@ void EventAction::EndOfEventAction(const G4Event* event)
       if (pri) edepPrimary   += e;
       else     edepSecondary += e;
 
-      auto& p = particleEdep[pn];
-      if (pri) p.first  += e;
-      else     p.second += e;
+      auto &p = particleEdep[pn];
+      if (pri)
+        p.first  += e;
+      else
+        p.second += e;
     }
   }
 
@@ -93,22 +95,26 @@ void EventAction::EndOfEventAction(const G4Event* event)
   if (pHC) {
     nPhotons = (G4int)pHC->entries();
     for (G4int i = 0; i < nPhotons; ++i) {
-      PMTHit* ph = (*pHC)[i];
-      if (ph->IsPhotoelectron()) ++nPE;
+      PMTHit *ph = (*pHC)[i];
+      if (ph->IsPhotoelectron())
+        ++nPE;
     }
   }
 
   //--------------------------------------------------------------------------
   // Fill RunAction accumulables (for terminal summary)
   //--------------------------------------------------------------------------
-  if (edepTotal > 0.) fRunAction->AddEdep(edepTotal);
-  for (G4int i = 0; i < nPhotons; ++i) fRunAction->AddPhoton();
-  for (G4int i = 0; i < nPE;      ++i) fRunAction->AddPhotoelectron();
+  if (edepTotal > 0.)
+    fRunAction->AddEdep(edepTotal);
+  for (G4int i = 0; i < nPhotons; ++i)
+    fRunAction->AddPhoton();
+  for (G4int i = 0; i < nPE; ++i)
+    fRunAction->AddPhotoelectron();
 
   //--------------------------------------------------------------------------
   // Fill ROOT histograms via G4AnalysisManager
   //--------------------------------------------------------------------------
-  auto* ana = G4AnalysisManager::Instance();
+  auto *ana = G4AnalysisManager::Instance();
 
   // H1 id=0: total Edep per event
   if (edepTotal > 0.)
@@ -155,7 +161,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
   // Per-event particle-type ntuples (one row per particle species seen)
   // Ntuple id=1 (booked in RunAction)
   //--------------------------------------------------------------------------
-  for (auto& kv : particleEdep) {
+  for (auto &kv : particleEdep) {
     ana->FillNtupleSColumn(1, 0, kv.first);               // particle name
     ana->FillNtupleDColumn(1, 1, kv.second.first  / MeV); // edep primary
     ana->FillNtupleDColumn(1, 2, kv.second.second / MeV); // edep secondary

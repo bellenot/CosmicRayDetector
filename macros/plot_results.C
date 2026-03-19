@@ -30,9 +30,9 @@ void plot_results(const char *pattern = "CosmicRayDetector_run0.root")
 
   // ---- Merge all matching files ----
   TChain *chEvents = new TChain("CosmicEvents");
-  TChain *chPart   = new TChain("ParticleEdep");
+  TChain *chPart = new TChain("ParticleEdep");
   chEvents->Add(pattern);
-  chPart  ->Add(pattern);
+  chPart->Add(pattern);
 
   Long64_t nEvents = chEvents->GetEntries();
   std::cout << "Total events loaded: " << nEvents << std::endl;

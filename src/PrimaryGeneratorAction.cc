@@ -22,9 +22,8 @@
 #include <numeric>
 
 //----------------------------------------------------------------------------
-PrimaryGeneratorAction::PrimaryGeneratorAction()
-  : G4VUserPrimaryGeneratorAction(), G4UImessenger(),
-    fGun(nullptr), fSourceRadius(35.*cm), fVerbose(false)
+PrimaryGeneratorAction::PrimaryGeneratorAction() : G4VUserPrimaryGeneratorAction(),
+    G4UImessenger(), fGun(nullptr), fSourceRadius(35.*cm), fVerbose(false)
 {
   fGun = new G4ParticleGun(1);
 
@@ -46,7 +45,8 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 
   // Build cumulative distribution function for species sampling
   G4double total = 0.;
-  for (auto& s : fSpecies) total += s.fraction;
+  for (auto &s : fSpecies)
+    total += s.fraction;
   G4double cumul = 0.;
   for (int i = 0; i < kNSpecies; ++i) {
     cumul    += fSpecies[i].fraction / total;
@@ -80,10 +80,10 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 }
 
 //----------------------------------------------------------------------------
-void PrimaryGeneratorAction::SetNewValue(G4UIcommand* cmd, G4String val)
+void PrimaryGeneratorAction::SetNewValue(G4UIcommand *cmd, G4String val)
 {
   if (cmd == fCmdRadius)
-    fSourceRadius = fCmdRadius->GetNewDoubleValue(val) * mm;
+    fSourceRadius = fCmdRadius->GetNewDoubleValue(val)*mm;
   else if (cmd == fCmdVerbose)
     fVerbose = fCmdVerbose->GetNewBoolValue(val);
 }
@@ -110,9 +110,7 @@ G4double PrimaryGeneratorAction::SampleCosSquaredTheta() const
 //            (Emax^{1-gamma} - Emin^{1-gamma})    for gamma ≠ 1
 //   CDF(E) = ln(E/Emin)/ln(Emax/Emin)             for gamma = 1
 //----------------------------------------------------------------------------
-G4double PrimaryGeneratorAction::SamplePowerLaw(G4double eMin,
-                                                 G4double eMax,
-                                                 G4double gam) const
+G4double PrimaryGeneratorAction::SamplePowerLaw(G4double eMin, G4double eMax, G4double gam) const
 {
   G4double r = G4UniformRand();
   if (std::abs(gam - 1.0) < 1.e-6) {
@@ -120,8 +118,7 @@ G4double PrimaryGeneratorAction::SamplePowerLaw(G4double eMin,
     return eMin * std::pow(eMax / eMin, r);
   }
   G4double alpha = 1. - gam;
-  G4double t = r * (std::pow(eMax, alpha) - std::pow(eMin, alpha))
-                 + std::pow(eMin, alpha);
+  G4double t = r * (std::pow(eMax, alpha) - std::pow(eMin, alpha)) + std::pow(eMin, alpha);
   return std::pow(t, 1. / alpha);
 }
 
@@ -132,7 +129,8 @@ G4int PrimaryGeneratorAction::SampleSpecies() const
 {
   G4double r = G4UniformRand();
   for (int i = 0; i < kNSpecies; ++i)
-    if (r <= fCDF[i]) return i;
+    if (r <= fCDF[i])
+      return i;
   return kNSpecies - 1;
 }
 
@@ -148,8 +146,7 @@ G4int PrimaryGeneratorAction::SampleSpecies() const
 // θ = 0   → particle comes straight down from directly overhead
 // θ = π/2 → particle arrives horizontally (grazing incidence)
 //----------------------------------------------------------------------------
-G4ThreeVector PrimaryGeneratorAction::SampleSourcePoint(G4double theta,
-                                                         G4double phi) const
+G4ThreeVector PrimaryGeneratorAction::SampleSourcePoint(G4double theta, G4double phi) const
 {
   G4double sinT = std::sin(theta);
   G4double cosT = std::cos(theta);
@@ -161,7 +158,7 @@ G4ThreeVector PrimaryGeneratorAction::SampleSourcePoint(G4double theta,
 //----------------------------------------------------------------------------
 // GeneratePrimaries — called once per event
 //----------------------------------------------------------------------------
-void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
+void PrimaryGeneratorAction::GeneratePrimaries(G4Event *event)
 {
   // 1. Sample angular coordinates
   G4double theta = SampleCosSquaredTheta();          // zenith  [0, π/2)
@@ -183,14 +180,13 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 
   // 4. Species and energy
   G4int idx = SampleSpecies();
-  const CosmicSpecies& sp = fSpecies[idx];
+  const CosmicSpecies &sp = fSpecies[idx];
 
   G4double eKinGeV = SamplePowerLaw(sp.eMin, sp.eMax, sp.gamma);
   G4double eKin    = eKinGeV * GeV;
 
   // 5. Resolve particle definition
-  G4ParticleDefinition* pd =
-      G4ParticleTable::GetParticleTable()->FindParticle(sp.name);
+  G4ParticleDefinition *pd = G4ParticleTable::GetParticleTable()->FindParticle(sp.name);
   if (!pd) {
     G4cerr << "CosmicGen: unknown particle '" << sp.name << "'" << G4endl;
     return;

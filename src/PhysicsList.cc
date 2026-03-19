@@ -32,8 +32,8 @@ PhysicsList::PhysicsList() : G4VModularPhysicsList()
   RegisterPhysics(new G4NeutronTrackingCut());
 
   // Optical physics
-  G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
-  auto* op = G4OpticalParameters::Instance();
+  G4OpticalPhysics *opticalPhysics = new G4OpticalPhysics();
+  auto *op = G4OpticalParameters::Instance();
   op->SetScintTrackSecondariesFirst(true);
   op->SetScintByParticleType(false);
   op->SetScintFiniteRiseTime(false);

@@ -19,10 +19,10 @@
 
 #include "Randomize.hh"
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
   // Detect interactive mode (if no arguments) and define UI session
-  G4UIExecutive* ui = nullptr;
+  G4UIExecutive *ui = nullptr;
   if (argc == 1) {
     ui = new G4UIExecutive(argc, argv);
   }
@@ -33,10 +33,11 @@ int main(int argc, char** argv)
 
   // Construct the Run Manager
 #ifdef G4MULTITHREADED
-  G4MTRunManager* runManager = new G4MTRunManager;
-  runManager->SetNumberOfThreads(4);
+  G4MTRunManager *runManager = new G4MTRunManager;
+//  runManager->SetNumberOfThreads(4);
+  runManager->SetNumberOfThreads(G4Threading::G4GetNumberOfCores());
 #else
-  G4RunManager* runManager = new G4RunManager;
+  G4RunManager *runManager = new G4RunManager;
 #endif
 
   // Set mandatory initialization classes
@@ -45,11 +46,11 @@ int main(int argc, char** argv)
   runManager->SetUserInitialization(new ActionInitialization());
 
   // Initialize visualization
-  G4VisManager* visManager = new G4VisExecutive;
+  G4VisManager *visManager = new G4VisExecutive;
   visManager->Initialize();
 
   // Get the pointer to the User Interface manager
-  G4UImanager* UImanager = G4UImanager::GetUIpointer();
+  G4UImanager *UImanager = G4UImanager::GetUIpointer();
 
   if (!ui) {
     // batch mode

@@ -5,15 +5,14 @@
 #include "G4SystemOfUnits.hh"
 #include "G4ios.hh"
 
-G4ThreadLocal G4Allocator<ScintiHit>* ScintiHitAllocator = nullptr;
+G4ThreadLocal G4Allocator<ScintiHit> *ScintiHitAllocator = nullptr;
 
-ScintiHit::ScintiHit()
-  : G4VHit(), fEdep(0.), fPos(G4ThreeVector()),
+ScintiHit::ScintiHit() : G4VHit(), fEdep(0.), fPos(G4ThreeVector()),
     fTime(0.), fParticleName(""), fTrackLength(0.), fParentID(0) {}
 
 ScintiHit::~ScintiHit() {}
 
-ScintiHit::ScintiHit(const ScintiHit& r) : G4VHit()
+ScintiHit::ScintiHit(const ScintiHit &r) : G4VHit()
 {
   fEdep         = r.fEdep;
   fPos          = r.fPos;
@@ -23,7 +22,7 @@ ScintiHit::ScintiHit(const ScintiHit& r) : G4VHit()
   fParentID     = r.fParentID;
 }
 
-const ScintiHit& ScintiHit::operator=(const ScintiHit& r)
+const ScintiHit &ScintiHit::operator=(const ScintiHit &r)
 {
   fEdep         = r.fEdep;
   fPos          = r.fPos;
@@ -34,7 +33,7 @@ const ScintiHit& ScintiHit::operator=(const ScintiHit& r)
   return *this;
 }
 
-G4bool ScintiHit::operator==(const ScintiHit& r) const { return this == &r; }
+G4bool ScintiHit::operator==(const ScintiHit &r) const { return this == &r; }
 
 void ScintiHit::Print()
 {

@@ -16,10 +16,10 @@ public:
   ScintiHit();
   virtual ~ScintiHit();
   ScintiHit(const ScintiHit&);
-  const ScintiHit& operator=(const ScintiHit&);
+  const ScintiHit &operator=(const ScintiHit&);
   G4bool operator==(const ScintiHit&) const;
 
-  inline void* operator new(size_t);
+  inline void *operator new(size_t);
   inline void  operator delete(void*);
 
   virtual void Draw() {}
@@ -51,16 +51,16 @@ private:
 };
 
 typedef G4THitsCollection<ScintiHit> ScintiHitsCollection;
-extern G4ThreadLocal G4Allocator<ScintiHit>* ScintiHitAllocator;
+extern G4ThreadLocal G4Allocator<ScintiHit> *ScintiHitAllocator;
 
-inline void* ScintiHit::operator new(size_t)
+inline void *ScintiHit::operator new(size_t)
 {
   if (!ScintiHitAllocator)
     ScintiHitAllocator = new G4Allocator<ScintiHit>;
   return (void*)ScintiHitAllocator->MallocSingle();
 }
 
-inline void ScintiHit::operator delete(void* hit)
+inline void ScintiHit::operator delete(void *hit)
 {
   ScintiHitAllocator->FreeSingle((ScintiHit*)hit);
 }

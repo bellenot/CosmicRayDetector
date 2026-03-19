@@ -9,12 +9,10 @@
 #include "G4ios.hh"
 
 //----------------------------------------------------------------------------
-RunAction::RunAction()
-  : G4UserRunAction(),
-    fTotalEdep(0.), fTotalPhotons(0), fTotalPE(0),
-    fFileName("CosmicRayDetector")
+RunAction::RunAction() : G4UserRunAction(), fTotalEdep(0.), fTotalPhotons(0),
+    fTotalPE(0), fFileName("CosmicRayDetector")
 {
-  auto* am = G4AccumulableManager::Instance();
+  auto *am = G4AccumulableManager::Instance();
   am->RegisterAccumulable(fTotalEdep);
   am->RegisterAccumulable(fTotalPhotons);
   am->RegisterAccumulable(fTotalPE);
@@ -23,39 +21,32 @@ RunAction::RunAction()
   // Book histograms (done once in the constructor so they exist on all
   // threads in MT mode; the analysis manager merges them at end-of-run)
   //--------------------------------------------------------------------------
-  auto* anaMgr = G4AnalysisManager::Instance();
+  auto *anaMgr = G4AnalysisManager::Instance();
   anaMgr->SetVerboseLevel(1);
   anaMgr->SetNtupleMerging(true);   // merge ntuples across threads
 
   // ---- 1D histograms ----
   // H1 id=0: total Edep per event
-  anaMgr->CreateH1("h_edep",
-      "Energy deposit in scintillator per event;E_{dep} (MeV);Events", 200, 0., 20.);
+  anaMgr->CreateH1("h_edep", "Energy deposit in scintillator per event;E_{dep} (MeV);Events", 200, 0., 20.);
 
   // H1 id=1: raw photon count at PMT per event
-  anaMgr->CreateH1("h_photons",
-      "Optical photons reaching PMT per event;N_{photons};Events", 200, 0., 25000.);
+  anaMgr->CreateH1("h_photons", "Optical photons reaching PMT per event;N_{photons};Events", 200, 0., 25000.);
 
   // H1 id=2: photoelectron count per event
-  anaMgr->CreateH1("h_pe",
-      "Photoelectrons produced per event;N_{PE};Events", 200, 0., 5000.);
+  anaMgr->CreateH1("h_pe", "Photoelectrons produced per event;N_{PE};Events", 200, 0., 5000.);
 
   // H1 id=3: Edep from primary tracks only
-  anaMgr->CreateH1("h_edep_primary",
-      "Edep from primary tracks;E_{dep,primary} (MeV);Events", 200, 0., 15.);
+  anaMgr->CreateH1("h_edep_primary", "Edep from primary tracks;E_{dep,primary} (MeV);Events", 200, 0., 15.);
 
   // H1 id=4: Edep from secondary tracks only
-  anaMgr->CreateH1("h_edep_secondary",
-      "Edep from secondary tracks;E_{dep,secondary} (MeV);Events", 200, 0., 15.);
+  anaMgr->CreateH1("h_edep_secondary", "Edep from secondary tracks;E_{dep,secondary} (MeV);Events", 200, 0., 15.);
 
   // H1 id=5: photon arrival time at PMT (relative to event start)
-  anaMgr->CreateH1("h_photon_time",
-      "Optical photon arrival time at PMT;t (ns);Photons", 200, 0., 20.);
+  anaMgr->CreateH1("h_photon_time", "Optical photon arrival time at PMT;t (ns);Photons", 200, 0., 20.);
 
   // ---- 2D histogram ----
   // H2 id=0: Edep vs PE count
-  anaMgr->CreateH2("h_edep_vs_pe",
-      "Energy deposit vs photoelectrons;E_{dep} (MeV);N_{PE}", 100, 0., 20., 100, 0., 5000.);
+  anaMgr->CreateH2("h_edep_vs_pe", "Energy deposit vs photoelectrons;E_{dep} (MeV);N_{PE}", 100, 0., 20., 100, 0., 5000.);
 
   // ---- Ntuples (one row per event) ----
   // Ntuple id=0: per-event summary
@@ -79,14 +70,13 @@ RunAction::RunAction()
 RunAction::~RunAction() {}
 
 //----------------------------------------------------------------------------
-void RunAction::BeginOfRunAction(const G4Run* run)
+void RunAction::BeginOfRunAction(const G4Run *run)
 {
   G4AccumulableManager::Instance()->Reset();
  
-  auto* anaMgr = G4AnalysisManager::Instance();
+  auto *anaMgr = G4AnalysisManager::Instance();
   // Append run number to filename so multiple runs don't overwrite each other
-  G4String fname = fFileName + "_run"
-                 + std::to_string(run->GetRunID()) + ".root";
+  G4String fname = fFileName + "_run" + std::to_string(run->GetRunID()) + ".root";
   // Reset histograms from previous run
   anaMgr->Reset();
   anaMgr->OpenFile(fname);
@@ -94,16 +84,17 @@ void RunAction::BeginOfRunAction(const G4Run* run)
 }
 
 //----------------------------------------------------------------------------
-void RunAction::EndOfRunAction(const G4Run* run)
+void RunAction::EndOfRunAction(const G4Run *run)
 {
   G4AccumulableManager::Instance()->Merge();
 
-  auto* anaMgr = G4AnalysisManager::Instance();
+  auto *anaMgr = G4AnalysisManager::Instance();
   anaMgr->Write();
   anaMgr->CloseFile(false);
 
   G4int n = run->GetNumberOfEvent();
-  if (n == 0) return;
+  if (n == 0)
+    return;
 
   G4double edep     = fTotalEdep.GetValue();
   G4int    nPhotons = fTotalPhotons.GetValue();

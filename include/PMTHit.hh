@@ -16,10 +16,10 @@ public:
   PMTHit();
   virtual ~PMTHit();
   PMTHit(const PMTHit&);
-  const PMTHit& operator=(const PMTHit&);
+  const PMTHit &operator=(const PMTHit&);
   G4bool operator==(const PMTHit&) const;
 
-  inline void* operator new(size_t);
+  inline void *operator new(size_t);
   inline void  operator delete(void*);
 
   virtual void Draw() {}
@@ -40,15 +40,15 @@ private:
 };
 
 typedef G4THitsCollection<PMTHit> PMTHitsCollection;
-extern G4ThreadLocal G4Allocator<PMTHit>* PMTHitAllocator;
+extern G4ThreadLocal G4Allocator<PMTHit> *PMTHitAllocator;
 
-inline void* PMTHit::operator new(size_t)
+inline void *PMTHit::operator new(size_t)
 {
   if (!PMTHitAllocator)
     PMTHitAllocator = new G4Allocator<PMTHit>;
   return (void*)PMTHitAllocator->MallocSingle();
 }
-inline void PMTHit::operator delete(void* h)
+inline void PMTHit::operator delete(void *h)
 { PMTHitAllocator->FreeSingle((PMTHit*)h); }
 
 #endif

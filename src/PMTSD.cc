@@ -35,12 +35,15 @@
 
 // QE table definition
 const std::array<G4double, PMTSD::kQENodes> PMTSD::kQE_E = {
-  1.77*eV, 2.07*eV, 2.48*eV, 2.70*eV, 2.95*eV, 3.26*eV, 3.65*eV };
+  1.77*eV, 2.07*eV, 2.48*eV, 2.70*eV, 2.95*eV, 3.26*eV, 3.65*eV
+};
+
 const std::array<G4double, PMTSD::kQENodes> PMTSD::kQE_QE = {
-  0.01,    0.08,    0.18,    0.22,    0.20,    0.12,    0.04 };
+  0.01,    0.08,    0.18,    0.22,    0.20,    0.12,    0.04
+};
 
 //----------------------------------------------------------------------------
-PMTSD::PMTSD(const G4String& name, const G4String& hcName)
+PMTSD::PMTSD(const G4String &name, const G4String &hcName)
   : G4VSensitiveDetector(name), fHitsCollection(nullptr)
 {
   collectionName.insert(hcName);
@@ -49,7 +52,7 @@ PMTSD::PMTSD(const G4String& name, const G4String& hcName)
 PMTSD::~PMTSD() {}
 
 //----------------------------------------------------------------------------
-void PMTSD::Initialize(G4HCofThisEvent* hce)
+void PMTSD::Initialize(G4HCofThisEvent *hce)
 {
   fHitsCollection = new PMTHitsCollection(SensitiveDetectorName, collectionName[0]);
   G4int id = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
@@ -60,8 +63,10 @@ void PMTSD::Initialize(G4HCofThisEvent* hce)
 G4double PMTSD::GetQE(G4double energy) const
 {
   // Below/above table range → 0
-  if (energy <= kQE_E[0])            return 0.;
-  if (energy >= kQE_E[kQENodes - 1]) return 0.;
+  if (energy <= kQE_E[0])
+    return 0.;
+  if (energy >= kQE_E[kQENodes - 1])
+    return 0.;
 
   // Linear interpolation
   for (int i = 0; i < kQENodes - 1; ++i) {
@@ -74,17 +79,17 @@ G4double PMTSD::GetQE(G4double energy) const
 }
 
 //----------------------------------------------------------------------------
-G4bool PMTSD::ProcessHits(G4Step* step, G4TouchableHistory*)
+G4bool PMTSD::ProcessHits(G4Step *step, G4TouchableHistory*)
 {
   // Only optical photons
-  if (step->GetTrack()->GetDefinition() !=
-      G4OpticalPhoton::OpticalPhotonDefinition()) return false;
+  if (step->GetTrack()->GetDefinition() != G4OpticalPhoton::OpticalPhotonDefinition())
+    return false;
 
   G4double energy = step->GetTrack()->GetTotalEnergy();
   G4double qe     = GetQE(energy);
   G4bool   isPE   = (G4UniformRand() < qe);
 
-  auto* hit = new PMTHit();
+  auto *hit = new PMTHit();
   hit->SetPhotonEnergy(energy);
   hit->SetTime(step->GetPostStepPoint()->GetGlobalTime());
   hit->SetIsPhotoelectron(isPE);
@@ -102,7 +107,8 @@ void PMTSD::EndOfEvent(G4HCofThisEvent*)
     G4int nRaw = fHitsCollection->entries();
     G4int nPE  = 0;
     for (G4int i = 0; i < nRaw; ++i)
-      if ((*fHitsCollection)[i]->IsPhotoelectron()) ++nPE;
+      if ((*fHitsCollection)[i]->IsPhotoelectron())
+        ++nPE;
     G4cout << "  PMTSD: " << nRaw << " photons → " << nPE << " PE" << G4endl;
   }
 }

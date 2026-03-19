@@ -9,7 +9,7 @@
 TrackingAction::TrackingAction()  : G4UserTrackingAction() {}
 TrackingAction::~TrackingAction() {}
 
-void TrackingAction::PreUserTrackingAction(const G4Track* track)
+void TrackingAction::PreUserTrackingAction(const G4Track *track)
 {
   if (track->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition())
     fpTrackingManager->SetStoreTrajectory(0);   // suppress from vis

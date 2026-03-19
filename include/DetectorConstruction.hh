@@ -16,11 +16,11 @@ public:
   DetectorConstruction();
   virtual ~DetectorConstruction();
 
-  virtual G4VPhysicalVolume* Construct();
+  virtual G4VPhysicalVolume *Construct();
   virtual void ConstructSDandField();
 
-  G4LogicalVolume* GetScintiLogical() const { return fScintiLog; }
-  G4LogicalVolume* GetPMTLogical()    const { return fPMTLog; }
+  G4LogicalVolume *GetScintiLogical() const { return fScintiLog; }
+  G4LogicalVolume *GetPMTLogical()    const { return fPMTLog; }
 
 private:
   void DefineMaterials();
@@ -31,18 +31,18 @@ private:
   G4double fPMTRadius, fPMTLength;
   G4double fGlueThickness;
 
-  G4LogicalVolume*   fWorldLog;
-  G4LogicalVolume*   fScintiLog;
-  G4LogicalVolume*   fAlLog;
-  G4LogicalVolume*   fPMTLog;
-  G4LogicalVolume*   fPMTWindowLog;
-  G4LogicalVolume*   fGlueLog;
+  G4LogicalVolume *fWorldLog;
+  G4LogicalVolume *fScintiLog;
+  G4LogicalVolume *fAlLog;
+  G4LogicalVolume *fPMTLog;
+  G4LogicalVolume *fPMTWindowLog;
+  G4LogicalVolume *fGlueLog;
 
-  G4VPhysicalVolume* fScintiPhys;
-  G4VPhysicalVolume* fAlPhys;
-  G4VPhysicalVolume* fPMTPhys;
-  G4VPhysicalVolume* fPMTWindowPhys;
-  G4VPhysicalVolume* fGluePhys;
+  G4VPhysicalVolume *fScintiPhys;
+  G4VPhysicalVolume *fAlPhys;
+  G4VPhysicalVolume *fPMTPhys;
+  G4VPhysicalVolume *fPMTWindowPhys;
+  G4VPhysicalVolume *fGluePhys;
 };
 
 #endif
