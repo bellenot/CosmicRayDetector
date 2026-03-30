@@ -1,5 +1,5 @@
 # ============================================================
-# vis.mac  —  OpenGL visualisation for CosmicRayDetector
+# vis.mac  -  OpenGL visualisation for CosmicRayDetector
 # ============================================================
 
 /vis/open OGL 1024x768-0+0

@@ -95,7 +95,7 @@ G4bool PMTSD::ProcessHits(G4Step *step, G4TouchableHistory*)
   hit->SetIsPhotoelectron(isPE);
   fHitsCollection->insert(hit);
 
-  // Kill photon — it has been absorbed by the cathode
+  // Kill photon - it has been absorbed by the cathode
   step->GetTrack()->SetTrackStatus(fStopAndKill);
   return true;
 }

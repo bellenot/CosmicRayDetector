@@ -103,7 +103,7 @@ void RunAction::EndOfRunAction(const G4Run *run)
 
   G4cout << G4endl
     << "============================================================\n"
-    << "     Cosmic Ray Detector — Run " << run->GetRunID() << " Summary\n"
+    << "     Cosmic Ray Detector - Run " << run->GetRunID() << " Summary\n"
     << "============================================================\n"
     << "  Events simulated         : " << n                         << "\n"
     << "  Total Edep in scinti     : " << edep/MeV   << " MeV"      << "\n"

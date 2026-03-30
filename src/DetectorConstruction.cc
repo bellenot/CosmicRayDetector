@@ -14,7 +14,7 @@
 //
 // The Al shell is constructed as a single G4UnionSolid (box + cylinder),
 // then the inner cavities are subtracted to leave only the thin foil walls.
-// All inner volumes are placed directly in the World — the Al shell is a
+// All inner volumes are placed directly in the World - the Al shell is a
 // separate sibling volume that wraps around them with zero gap.
 //============================================================================
 #include "DetectorConstruction.hh"
@@ -165,7 +165,7 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
   }
 
   //==========================================================================
-  // Aluminum foil shell — one continuous light-tight enclosure
+  // Aluminum foil shell - one continuous light-tight enclosure
   //
   // Construction strategy (boolean solids):
   //

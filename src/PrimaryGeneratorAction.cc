@@ -156,7 +156,7 @@ G4ThreeVector PrimaryGeneratorAction::SampleSourcePoint(G4double theta, G4double
 }
 
 //----------------------------------------------------------------------------
-// GeneratePrimaries — called once per event
+// GeneratePrimaries - called once per event
 //----------------------------------------------------------------------------
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event *event)
 {

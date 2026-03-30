@@ -6,16 +6,16 @@
 // The ROOT file is written and closed at EndOfRunAction.
 //
 // Histograms booked:
-//   ID 0  h_edep          — total energy deposit per event (MeV)
-//   ID 1  h_photons        — raw optical photons reaching PMT per event
-//   ID 2  h_pe             — photoelectrons produced per event
-//   ID 3  h_edep_primary   — Edep from primary tracks only (parentID==0)
-//   ID 4  h_edep_secondary — Edep from secondary tracks only (parentID>0)
-//   ID 5  h_edep_vs_pe     — 2D: Edep (x) vs PE count (y)
+//   ID 0  h_edep           - total energy deposit per event (MeV)
+//   ID 1  h_photons        - raw optical photons reaching PMT per event
+//   ID 2  h_pe             - photoelectrons produced per event
+//   ID 3  h_edep_primary   - Edep from primary tracks only (parentID==0)
+//   ID 4  h_edep_secondary - Edep from secondary tracks only (parentID>0)
+//   ID 5  h_edep_vs_pe     - 2D: Edep (x) vs PE count (y)
 //
 // 1D string histograms (H1 with string labels):
-//   ID 6  h_particle_primary   — particle types depositing energy (primary)
-//   ID 7  h_particle_secondary — particle types depositing energy (secondary)
+//   ID 6  h_particle_primary   - particle types depositing energy (primary)
+//   ID 7  h_particle_secondary - particle types depositing energy (secondary)
 //============================================================================
 #ifndef RunAction_h
 #define RunAction_h 1

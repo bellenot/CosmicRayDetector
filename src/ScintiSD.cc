@@ -28,7 +28,7 @@ void ScintiSD::Initialize(G4HCofThisEvent *hce)
 
 G4bool ScintiSD::ProcessHits(G4Step *step, G4TouchableHistory*)
 {
-  // Optical photons carry no ionisation energy — skip them here;
+  // Optical photons carry no ionisation energy - skip them here;
   // they are handled by PMTSD when they reach the cathode.
   if (step->GetTrack()->GetDefinition() ==
       G4OpticalPhoton::OpticalPhotonDefinition()) return false;

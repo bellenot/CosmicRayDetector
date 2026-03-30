@@ -1,5 +1,5 @@
 # ============================================================
-# batch.mac  —  macro to run in batch mode. For example:
+# batch.mac  -  macro to run in batch mode. For example:
 # CosmicRayDetector.exe macros/batch.mac
 # ============================================================
 

@@ -1,7 +1,7 @@
 //============================================================================
 // PrimaryGeneratorAction.hh
 //
-// Custom cosmic ray generator — fully in C++, no macro required.
+// Custom cosmic ray generator - fully in C++, no macro required.
 //
 // Angular distribution : I(θ) ∝ cos²(θ)  (rejection sampling)
 // Azimuth φ            : uniform [0, 2π)

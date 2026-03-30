@@ -24,11 +24,11 @@ include(${Geant4_USE_FILE})
 #----------------------------------------------------------------------------
 find_package(ROOT QUIET COMPONENTS Core RIO Hist Tree)
 if(ROOT_FOUND)
-  message(STATUS "ROOT found: ${ROOT_VERSION} — histograms enabled")
+  message(STATUS "ROOT found: ${ROOT_VERSION} - histograms enabled")
   include(${ROOT_USE_FILE})
   add_definitions(-DHAS_ROOT)
 else()
-  message(WARNING "ROOT not found — no histogram output will be produced")
+  message(WARNING "ROOT not found - no histogram output will be produced")
 endif()
 
 #----------------------------------------------------------------------------

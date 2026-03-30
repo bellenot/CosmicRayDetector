@@ -60,7 +60,7 @@ void EventAction::EndOfEventAction(const G4Event *event)
   auto *pHC = static_cast<PMTHitsCollection*>   (hce->GetHC(fPMTHCID));
 
   //--------------------------------------------------------------------------
-  // Scintillator hits — accumulate per-event quantities
+  // Scintillator hits - accumulate per-event quantities
   //--------------------------------------------------------------------------
   G4double edepTotal     = 0.;
   G4double edepPrimary   = 0.;
@@ -149,7 +149,7 @@ void EventAction::EndOfEventAction(const G4Event *event)
   //--------------------------------------------------------------------------
   // Fill ntuple (one row per event)
   //--------------------------------------------------------------------------
-  // Ntuple id=0 — use explicit (ntupleId, colId, value) form
+  // Ntuple id=0 - use explicit (ntupleId, colId, value) form
   ana->FillNtupleDColumn(0, 0, edepTotal     / MeV);
   ana->FillNtupleIColumn(0, 1, nPhotons);
   ana->FillNtupleIColumn(0, 2, nPE);

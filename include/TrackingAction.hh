@@ -4,7 +4,7 @@
 // Suppresses trajectory storage for optical photons so they never appear
 // in the visualiser. All other particles are drawn normally.
 //
-// Uses fpTrackingManager->SetStoreTrajectory(G4int) — the correct modern
+// Uses fpTrackingManager->SetStoreTrajectory(G4int) - the correct modern
 // Geant4 API (works in Geant4 10.x and 11.x).
 //   0 = do not store  (photons: invisible in vis, still fully tracked)
 //   1 = store         (all other particles)
